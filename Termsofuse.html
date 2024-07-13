@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Kuah Boon Cheong, and Bootstrap contributors">
+    <meta name="generator" content="Visual Studio Code  1.19.0">
+    <title>Silent Library Home</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<link href="/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary { 
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      } */
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+      body {
+            position: relative; /* Ensure the body can contain positioned elements */
+            min-height: 100vh; /* Ensure the body takes up at least the viewport height */
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
+        }
+
+        .background-image {
+            position: fixed; /* Position the image relative to the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the image behind other content */
+            opacity: 0.5; /* Adjust opacity as needed */
+        }
+
+        .content {
+      position: relative; /* Ensure content stacks above the background image */
+      z-index: 1; /* Ensure content is above the background image */
+      text-align: center;
+      padding: 10px;
+      color: white; /* Example text color */
+    }
+
+    .container.text-center {
+      margin-top: 10px; /* Reduce margin-top */
+      margin-bottom: 10px; /* Reduce margin-bottom */
+    }
+    .scroll-bg{
+      background-color: rgb(223, 227, 227);
+      width: 1100px;
+      margin: 20% auto;
+    }
+    .scrol-div {
+      background-color: aqua;
+      height: 100%;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+    .scroll-object {
+      color: black;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+      'Lucida Grande', 'Lucida Sans Unicode', 
+      Geneva, Verdana, sans-serif;
+      font-size: auto;
+      padding: 10px;
+    }
+
+    </style>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <!-- <symbol id="bootstrap" viewBox="0 0 118 94">
+    <title>Bootstrap</title>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+  </symbol> -->
+  <symbol id="facebook" viewBox="0 0 16 16">
+    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+  </symbol>
+  <symbol id="instagram" viewBox="0 0 16 16">
+      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+  </symbol>
+  <symbol id="twitter" viewBox="0 0 16 16">
+    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+  </symbol>
+</svg>
+  </head>
+  <body>
+ 
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="silent_library-logo" style="text-decoration: none;">Silent Library</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="book-link nav-link" style="text-decoration: none;" href="/books.html">Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="contact-link nav-link" style="text-decoration: none;" href="/contact.html">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Events
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/events.html">What's On</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+<main>
+  <div class="background-image">
+  <img src="/pexels-nsu-mon-39223523.jpg" alt="Background Image" class="background-image">
+  </div>
+ 
+  <div class="scroll-bg">
+    <div class="scroll-dv">
+        <div class="scroll-object">
+          
+          <h3>Privacy Policy</h3> 
+          
+          <h5>Introduction</h5><br>
+          <pre>
+            TERMS OF SERVICE
+ 
+            1.    INTRODUCTION
+             
+            1.1.    Welcome to the Silent Library platform (the "Site"). Please read the following Terms of Service carefully before using this Site or opening a  Silent Library account ("Account") so that you are aware of your legal rights and obligations with respect to Silent Library  and its affiliates and subsidiaries (individually and collectively, " Silent Library ", "we", "us" or "our"). The "Services" we provide or make available include (a) the Site, (b) the services provided by the Site and by Silent Library client software made available through the Site, and (c) all information, linked pages, features, data, text, images, photographs, graphics, music, sounds, video (including live streams), messages, tags, content, programming, software, application services (including, without limitation, any mobile application services) or other materials made available through the Site or its related services ("Content"). Any new features added to or augmenting the Services are also subject to these Terms of Service. These Terms of Service govern your use of Services provided by Silent Library.
+             
+            1.2.     The Services include an online platform service that provides a place and opportunity for the sale of goods between the buyer (“Buyer”) and the seller (“Seller”) (collectively “you”, “Users” or “Parties”). The actual contract for sale is directly between Buyer and Seller and Silent Library is not a party to that or any other contract between Buyer and Seller and accepts no obligations in connection with any such contract. Parties to such transaction will be entirely responsible for the sales contract between them, the listing of goods, warranty of purchase and the like. Silent Library is not involved in the transaction between Users. Silent Library may or may not pre-screen Users or the Content or information provided by Users. Silent Library reserves the right to remove any Content or information posted by you on the Site in accordance to Section 6.4 herein. Silent Library cannot ensure that Users will actually complete a transaction.
+             
+            1.3.    Before becoming a User of the Site, you must read and accept all of the terms and conditions in, and linked to, these Terms of Service and you must consent to the processing of your personal data as described in the Privacy Policy linked hereto.
+             
+            1.4.    Silent Library reserves the right to change, modify, suspend or discontinue all or any part of this Site or the Services at any time or upon notice as required by local laws. Silent Library may release certain Services or their features in a beta version, which may not work correctly or in the same way the final version may work, and we shall not be held liable in such instances. Silent Library may also impose limits on certain features or restrict your access to parts of, or the entire, Site or Services in its sole discretion and without notice or liability.
+             
+            1.5.    Silent Library reserves the right to refuse to provide you access to the Site or Services or to allow you to open an Account for any reason.
+             
+            BY USING SILENT LIBRARY SERVICES OR OPENING AN ACCOUNT, YOU GIVE YOUR IRREVOCABLE ACCEPTANCE OF AND CONSENT TO THE TERMS OF THIS AGREEMENT, INCLUDING THOSE ADDITIONAL TERMS AND CONDITIONS AND POLICIES REFERENCED HEREIN AND/OR LINKED HERETO.
+             
+            IF YOU DO NOT AGREE TO THESE TERMS, PLEASE DO NOT USE OUR SERVICES OR ACCESS THE SITE. IF YOU ARE UNDER THE AGE OF 18 OR THE LEGAL AGE FOR GIVING CONSENT HEREUNDER PURSUANT TO THE APPLICABLE LAWS IN YOUR COUNTRY (THE “LEGAL AGE”), YOU MUST GET PERMISSION FROM A PARENT OR LEGAL GUARDIAN TO OPEN AN ACCOUNT AND THAT PARENT OR LEGAL GUARDIAN MUST AGREE TO THE TERMS OF THIS AGREEMENT. IF YOU DO NOT KNOW WHETHER YOU HAVE REACHED THE LEGAL AGE, OR DO NOT UNDERSTAND THIS SECTION, PLEASE DO NOT CREATE AN ACCOUNT UNTIL YOU HAVE ASKED YOUR PARENT OR LEGAL GUARDIAN FOR HELP. IF YOU ARE THE PARENT OR LEGAL GUARDIAN OF A MINOR WHO IS CREATING AN ACCOUNT, YOU MUST ACCEPT THE TERMS OF THIS AGREEMENT ON THE MINOR'S BEHALF AND YOU WILL BE RESPONSIBLE FOR ALL USE OF THE ACCOUNT OR COMPANY SERVICES USING SUCH ACCOUNT, WHETHER SUCH ACCOUNT IS CURRENTLY OPEN OR CREATED LATER.
+            
+            
+            
+            
+            2.    PRIVACY
+            2.1      Your privacy is very important to us at Silent Library, To better protect your rights we have provided the silentlibrary.com.sg Privacy Policy to explain our privacy practices in detail. Please review the Privacy Policy to understand how Silent Library collects and uses the information associated with your Account and/or your use of the Services (the “User Information”). By using the Services or providing information on the Site, you:
+            (i)            consent to Silent Library’s collection, use, disclosure and/or processing of your Content, personal data and User Information as described in the Privacy Policy;
+            (ii)          agree and acknowledge that the proprietary rights of your User Information are jointly owned by you and Silent Library; and
+            (iii)         shall not, whether directly or indirectly, disclose your User Information to any third party, or otherwise allow any third party to access or use your User Information, without Silent Library’s prior written consent.
+            2.2      Users in possession of another User’s personal data through the use of the Services (the “Receiving Party”) hereby agree that, they will (i) comply with all applicable personal data protection laws with respect to any such data; (ii) allow the User whose personal data the Receiving Party has collected (the “Disclosing Party”) to remove his or her data so collected from the Receiving Party’s database; and (iii) allow the Disclosing Party to review what information have been collected about them by the Receiving Party, in each case of (ii) and (iii) above, in compliance with and where required by applicable laws.
+            
+            
+            
+            3.      LIMITED LICENSE
+            3.1      Silent Library grants you a limited and revocable license to access and use the Services subject to the terms and conditions of these Terms of Service. All proprietary Content, trademarks, service marks, brand names, logos and other intellectual property (“Intellectual Property”) displayed in the Site are the property of Silent Library and where applicable, third party proprietors identified in the Site. No right or licence is granted directly or indirectly to any party accessing the Site to use or reproduce any Intellectual Property, and no party accessing the Site shall claim any right, title or interest therein. By using or accessing the Services you agree to comply with the copyright, trademark, service mark, and all other applicable laws that protect the Services, the Site and its Content. You agree not to copy, distribute, republish, transmit, publicly display, publicly perform, modify, adapt, rent, sell, or create derivative works of any portion of the Services, the Site or its Content. You also may not, without our prior written consent, mirror or frame any part or whole of the contents of this Site on any other server or as part of any other website. In addition, you agree that you will not use any robot, spider or any other automatic device or manual process to monitor or copy our Content, without our prior written consent (such consent is deemed given for standard search engine technology employed by Internet search websites to direct Internet users to this website).
+             
+            3.2      You are welcome to link to the Site from your website, provided that your website does not imply any endorsement by or association with Silent Library. You acknowledge that Silent Library may, in its sole discretion and at any time, discontinue providing the Services, either in part or as a whole, without notice.
+             
+             
+            4.     SOFTWARE
+            Any software provided by us to you as part of the Services is subject to the provisions of these Terms of Service. Silent Library reserves all rights to the software not expressly granted by Silent Library hereunder. Any third-party scripts or code, linked to or referenced from the Services, are licensed to you by the third parties that own such scripts or code, not by Silent Library.
+            
+            
+            
+            5.     ACCOUNTS AND SECURITY
+            5.1      Some functions of our Services require registration for an Account by selecting a unique user identification ("User ID") and password, and by providing certain personal information. If you select a User ID that Silent Library, in its sole discretion, finds offensive or inappropriate, Silent Library has the right to suspend or terminate your Account. You may be able to use your Account to gain access to other products, websites or services to which we have enabled access or with which we have tied up or collaborated. Silent Library has not reviewed, and assumes no responsibility for any third party content, functionality, security, services, privacy policies, or other practices of those products, websites or services. If you do so, the terms of service for those products, websites or services, including their respective privacy policies, if different from these Terms of Service and/or our Privacy Policy, may also apply to your use of those products, websites or services.
+             
+            5.2      You agree to (a) keep your password confidential and use only your User ID and password when logging in, (b) ensure that you log out from your account at the end of each session on the Site, (c) immediately notify Silent Library of any unauthorised use of your Account, User ID and/or password, and (d) ensure that your Account information is accurate and up-to-date. You are fully responsible for all activities that occur under your User ID and Account even if such activities or uses were not committed by you. Silent Library will not be liable for any loss or damage arising from unauthorised use of your password or your failure to comply with this Section.
+             
+            5.3      You agree that Silent Library may for any reason, in its sole discretion and with or without notice or liability to you or any third party, immediately terminate your Account and your User ID, remove or discard from the Site any Content associated with your Account and User ID, withdraw any subsidies offered to you, cancel any transactions associated with your Account and User ID, temporarily withhold any sale proceeds or refunds, and/or take any other actions that Silent Library deems necessary. Grounds for such actions may include, but are not limited to, (a) extended periods of inactivity, (b) violation of the letter or spirit of these Terms of Service, (c) illegal, fraudulent, harassing, defamatory, threatening or abusive behaviour (d) having multiple user accounts for illegitimate reasons, or (e) behaviour that is harmful to other Users, third parties, or the business interests of Silent Library. Use of an Account for illegal, fraudulent, harassing, defamatory, threatening or abusive purposes may be referred to law enforcement authorities without notice to you. If a legal dispute arises or law enforcement action is commenced relating to your Account or your use of the Services for any reason, Silent Library may terminate your Account immediately with or without notice.
+             
+            5.4      Users may terminate their Account if they notify Silent Library in writing (including via email at support@silentlibrary.com.sg) of their desire to do so. Notwithstanding any such termination, Users remain responsible and liable for any incomplete transaction (whether commenced prior to or after such termination), shipment of the product, payment for the product, or the like, and Users must contact Silent Library after he or she has promptly and effectively carried out and completed all incomplete transactions according to the Terms of Service. Silent Library shall have no liability, and shall not be liable for any damages incurred due to the actions taken in accordance with this Section. Users waive any and all claims based on any such action taken by Silent Library.
+             
+            5.5      You may only use the Services and/or open an Account if you are located in one of our approved countries, as updated from time to time.
+            
+            
+            
+            
+            6.     TERM OF USE
+            6.1      The license for use of this Site and the Services is effective until terminated. This license will terminate as set forth under these Terms of Service or if you fail to comply with any term or condition of these Terms of Service. In any such event, Silent Library may effect such termination with or without notice to you.
+             
+            6.2      You agree not to:
+            (a)       upload, post, transmit or otherwise make available any Content that is unlawful, harmful, threatening, abusive, harassing, alarming, distressing, tortuous, defamatory, vulgar, obscene, libelous, invasive of another's privacy, hateful, or racially, ethnically or otherwise objectionable;
+             
+            (b)      violate any laws, including without limitation any laws and regulation in relation to export and import restrictions, third party rights or our Prohibited and Restricted Items policy;
+             
+            (c)       use the Services to harm minors in any way;
+             
+            (d)      use the Services or upload Content to impersonate any person or entity, or otherwise misrepresent your affiliation with a person or entity;
+             
+            (e)       forge headers or otherwise manipulate identifiers in order to disguise the origin of any Content transmitted through the Services;
+             
+            (f)        remove any proprietary notices from the Site;
+             
+            (g)      cause, permit or authorize the modification, creation of derivative works, or translation of the Services without the express permission of Silent Library;
+             
+            (h)       use the Services for the benefit of any third party or any manner not permitted by the licenses granted herein;
+             
+            (i)        use the Services or upload Content in a manner that is fraudulent, unconscionable, false, misleading or deceptive;
+             
+            (j)        manipulate the price of any item or interfere with other User's listings;
+             
+            (k)       take any action that may undermine the feedback or ratings systems;
+             
+            (l)        attempt to decompile, reverse engineer, disassemble or hack the Services (or any portion thereof), or to defeat or overcome any encryption technology or security measures implemented by Silent Library with respect to the Services and/or data transmitted, processed or stored by Silent Library;
+             
+            (m)     harvest or collect any information about or regarding other Account holders, including, without limitation, any personal data or information;
+             
+            (n)       upload, email, post, transmit or otherwise make available any Content that you do not have a right to make available under any law or under contractual or fiduciary relationships (such as inside information, proprietary and confidential information learned or disclosed as part of employment relationships or under nondisclosure agreements);
+             
+            (o)      upload, email, post, transmit or otherwise make available any Content that infringes any patent, trademark, trade secret, copyright or other proprietary rights of any party;
+             
+            (p)      upload, email, post, transmit or otherwise make available any unsolicited or unauthorised advertising, promotional materials, "junk mail", "spam", "chain letters", "pyramid schemes", or any other unauthorised form of solicitation;
+             
+            (q)      upload, email, post, transmit or otherwise make available any material that contains software viruses, worms, Trojan-horses or any other computer code, routines, files or programs designed to directly or indirectly interfere with, manipulate, interrupt, destroy or limit the functionality or integrity of any computer software or hardware or data or telecommunications equipment;
+             
+            (r)        disrupt the normal flow of dialogue, cause a screen to "scroll" faster than other Users of the Services are able to type, or otherwise act in a manner that negatively affects other Users' ability to engage in real time exchanges;
+             
+            (s)       interfere with, manipulate or disrupt the Services or servers or networks connected to the Services or any other User's use and enjoyment of the Services, or disobey any requirements, procedures, policies or regulations of networks connected to the Site;
+             
+            (t)        take any action or engage in any conduct that could directly or indirectly damage, disable, overburden, or impair the Services or the servers or networks connected to the Services;
+             
+            (u)       use the Services to intentionally or unintentionally violate any applicable local, state, national or international law, rule, code, directive, guideline, policy or regulation including, without limitation, laws and requirements (whether or not having the force of law) relating to anti-money laundering or counter-terrorism;
+             
+            (v)       use the Services in violation of or to circumvent any sanctions or embargo administered or enforced by the U.S. Department of Treasury’s Office of Foreign Assets Control, the United Nations Security Council, the European Union or Her Majesty’s Treasury;
+             
+            (w)      use the Services to violate the privacy of others or to "stalk" or otherwise harass another;
+             
+            (x)       infringe the rights of Silent Library, including any intellectual property rights and any passing off of the same thereof;
+             
+            (y)       use the Services to collect or store personal data about other Users in connection with the prohibited conduct and activities set forth above; and/or
+             
+            (z)       list items which infringe upon the copyright, trademark or other intellectual property rights of third parties or use the Services in a manner which will infringe the intellectual property rights of others.
+             
+            6.3      You understand that all Content, whether publicly posted or privately transmitted, is the sole responsibility of the person from whom such Content originated. This means that you, and not Silent Library, are entirely responsible for all Content that you upload, post, email, transmit or otherwise make available through the Site. You understand that by using the Site, you may be exposed to Content that you may consider to be offensive, indecent or objectionable. To the maximum extent permitted by applicable law, under no circumstances will Silent Library be liable in any way for any Content, including, but not limited to, any errors or omissions in any Content, or any loss or damage of any kind incurred as a result of the use of, or reliance on, any Content posted, emailed, transmitted or otherwise made available on the Site.
+             
+            6.4      You acknowledge that Silent Library and its designees shall have the right (but not the obligation) in their sole discretion to pre-screen, refuse, delete, stop, suspend, remove or move any Content, including without limitation any Content or information posted by you, that is available on the Site. Without limiting the foregoing, Silent Library and its designees shall have the right to remove any Content (i) that violates these Terms of Service; (ii) if we receive a complaint from another User; (iii) if we receive a notice of intellectual property infringement or other legal instruction for removal; or (iv) if such Content is otherwise objectionable. We may also block delivery of a communication (including, without limitation, status updates, postings, messages and/or chats) to or from the Services as part of our effort to protect the Services or our Users, or otherwise enforce the provisions of these Terms and Conditions. You agree that you must evaluate, and bear all risks associated with, the use of any Content, including, without limitation, any reliance on the accuracy, completeness, or usefulness of such Content. In this regard, you acknowledge that you have not and, to the maximum extent permitted by applicable law, may not rely on any Content created by Silent Library or submitted to Silent Library, including, without limitation, information in Silent Library Forums and in all other parts of the Site.
+             
+            6.5      You acknowledge, consent to and agree that Silent Library may access, preserve and disclose your Account information and Content if required to do so by law or pursuant to an order of a court or by any governmental or regulatory authority having jurisdiction over Silent Library or in a good faith belief that such access preservation or disclosure is reasonably necessary to: (a) comply with legal process; (b) enforce these Terms of Service; (c) respond to claims that any Content violates the rights of third parties; (d) respond to your requests for customer service; or (e) protect the rights, property or personal safety of Silent Library, its Users and/or the public.
+             
+            
+            
+            7.     VIOLATION OF OUR TERMS OF SERVICE
+            7.1      Violations of this policy may result in a range of actions, including, without limitation, any or all of the following:
+            - Listing deletion
+            -  Limits placed on Account privileges
+            -  Account suspension and subsequent termination
+            -  Criminal charges 
+            -  Civil actions, including without limitation a claim for damages and/or interim or injunctive relief
+             
+            7.2       If you believe a User on our Site is violating these Terms of Service, please contact support@silentlibrary.com.sg.
+            
+            
+             
+            8.     REPORTING INTELLECTUAL PROPERTY RIGHTS INFRINGEMENT 
+            8.1      The Users are independent individuals or businesses and they are not associated with Silent Library in any way. Silent Library is neither the agent nor representative of the Users and does not hold and/or own any of the merchandises listed on the Site.
+             
+            8.2       If you are an intellectual property right owner (“IPR Owner”) or an agent duly authorised by an IPR Owner (“IPR Agent”) and you believe that your right or your principal’s right has been infringed, please notify us in writing by email to support@silentlibrary.com.sg and legal@silentlibrary.com.sg and provide us the documents requested below to support your claim. Do allow us time to process the information provided. Silent Library will respond to your complaint as soon as practicable.
+             
+            8.3      Complaints under this Section 8 must be provided in the form prescribed by Silent Library, which may be updated from time to time, and must include at least the following: (a) a physical or electronic signature of an IPR Owner or IPR Agent (collectively, “Informant”); (b) a description of the type and nature of intellectual property right that is allegedly infringed and proof of rights; (c) details of the listing which contains the alleged infringement; (d) sufficient information to allow Silent Library to contact the Informant, such as Informant’s physical address, telephone number and e-mail address; (e) a statement by Informant that the complaint is filed on good faith belief and that the use of the intellectual property as identified by the Informant is not authorised by the IPR Owner or the law; (f) a statement by the Informant that the information in the notification is accurate, indemnify us for any damages we may suffer as a result of the information provided by and that the Informant has the appropriate right or is authorised to act on IPR Owner’s behalf to the complaint.
+             
+            
+            
+            9.     PURCHASE AND PAYMENT
+            9.1      Silent Library supports one or more of the following payment methods in each country it operates in:
+            (i)      OISBIZCRAFT Payment
+            OISBIZCRAFT payments are processed through third-party payment channels and the type of paypal account are   accepted by these payment channels may vary depending on the jurisdiction you are in.
+             
+            9.2       Buyer may only change their preferred mode of payment for their purchase prior to making payment.
+             
+            9.3       Silent Library takes no responsibility and assume no liability for any loss or damages to Buyer arising from shipping information and/or payment information entered by Buyer or wrong remittance by Buyer in connection with the payment for the items purchased. We reserve the right to check whether Buyer is duly authorised to use certain payment method, and may suspend the transaction until such authorisation is confirmed or cancel the relevant transaction where such confirmation is not available.
+             
+            9.4      At the moment, Silent Library is only able to make payment to Users via bank transfer. Hence, Users are required to provide Silent Library with his/her banking details in order to receive payments i.e. from the sale of item or refund from Silent Library.
+             
+              
+            10.  DELIVERY
+            10.1   Silent Library  will inform Seller when Silent Library  receives Buyer’s Purchase Monies. Unless otherwise agreed with Silent Library , Seller should then make the necessary arrangements to have the purchased item delivered to Buyer and provide details such as the name of the delivery company, the tracking number, etc. to Buyer through the Site.
+             
+            10.2   Seller must use his/her best effort to ensure that Buyer receives the purchased items within, whichever applicable, the time period specified by Seller on Seller’s listing.
+             
+            10.3    Users understand that Seller bears all risk attached to the delivery of the purchased item(s) and warrants that he/she has or will obtain adequate insurance coverage for the delivery of the purchased item(s). In the event where the purchased item(s) is damaged, lost or failure of delivery during the course of delivery, Users acknowledge and agree that Silent Library  will not be liable for any damage, expense, cost or fees resulted therefrom and Seller and/or Buyer will reach out to the logistic service provider to resolve such dispute.
+             
+            10.4   For Cross-Border Transaction. Users understand and acknowledge that, where a product listing states that the product will ship from overseas, such product is being sold from a Seller based outside of Singapore, and  the importation and exportation of such product is subject to local laws and regulations. Users should familiarise themselves with all import and export restrictions that apply to the designating country. Users acknowledge that Silent Library cannot provide any legal advice in this regard and agrees that Silent Library shall not bear any risks or liabilities associated with the import and export of such products to Singapore.
+             
+             
+            11.  CANCELLATION, RETURN AND REFUND
+            11.1   Buyer may only cancel his/her order prior to the payment of Buyer’s Purchase Monies into Silent Library  Seller Account.
+             
+            11.2   Buyer may apply for the return of the purchased item and refund prior to the discussion with Seller, if applicable, subject to and in accordance with Silent Library ’s Refunds and Return Policy.
+             
+            11.3   Silent Library  reserves the right to cancel any transaction on the Site and Buyer agrees that Buyer’s sole remedy will be to receive a refund of the Buyer’s Purchase Monies paid into Silent Library Seller Account.
+             
+            11.4   Silent Library  does not monitor the cancellation, return and refund process for any additional offline payment.
+             
+            
+            
+            12.   SELLER’S RESPONSIBILITIES
+            12.1   Seller shall properly manage and ensure that relevant information such as the price and the details of items, inventory amount and terms and conditions for sales is updated on Seller’s listing and shall not post inaccurate or misleading information.
+             
+            12.2   The price of items for sale will be determined by the Seller at his/her own discretion. The price of an item and shipping charges shall include the entire amount to be charged to Buyer such as sales tax, value-added tax, tariffs, etc. and Seller shall not charge Buyer such amount additionally and separately.
+             
+            12.3   Seller agrees that Silent Library  may at its discretion engage in promotional activities to induce transactions between Buyer and Seller by reducing, discounting or refunding fees, or in other ways. The final price that Buyer will pay actually will be the price that such adjustment is applied to.
+             
+            12.4   For the purpose of promoting the sales of the items listed by Seller, Silent Library  may post such items (at adjusted price) on third-party websites (such as portal sites and price comparison sites) and other websites (domestic or foreign) operated by Silent Library .
+             
+            12.5   Seller shall issue receipts, credit card slips or tax invoices to Buyer on request.
+             
+            12.6   Seller acknowledges and agrees that Seller will be responsible for paying all taxes, customs and duties for the item sold and Silent Library  cannot provide any legal or tax advice in this regard. As tax laws and regulations may change from time to time, Sellers are advised to seek professional advice if in doubt.         
+             
+            12.7   Seller acknowledge and agrees that Seller’s violation of any of Silent Library’s polices will result in a range of actions as stated in Section 7.1.
+             
+            
+            
+            13.  DISPUTES 
+            13.1   In the event a problem arises in a transaction, the Buyer and Seller agree to communicate with each other first to attempt to resolve such dispute by mutual discussions, which Silent Library  shall use reasonable commercial efforts to facilitate. If the matter cannot be resolved by mutual discussions, Users may approach the claims tribunal of their local jurisdiction to resolve any dispute arising from a transaction.
+             
+            13.2   Each Buyer and Seller covenants and agrees that it will not bring suit or otherwise assert any claim against Silent Library  or its Affiliates (except where Silent Library  or its Affiliates is the Seller of the product that the claim relates to) in relation to any transaction made on the Site or any dispute related to such transaction.
+             
+            13.3   Users may send written request to Silent Library  to assist them in resolving issues which may arise from a transaction upon request. Silent Library  may, at its sole discretion and with absolutely no liability to Seller and Buyer, take all necessary steps to assist Users resolving their dispute. For more information, please refer to Silent Library ’s Refunds and Return Policy.
+            
+            
+            
+            
+            14.   FEEDBACK
+            14.2   Silent Library  welcomes information and feedback from our Users which will enable Silent Library  to improve the quality of service provided. Please refer to our feedback procedure below for further information:
+            (i)            Feedback may be made in writing through email to or using the feedback form found on the Silent Library website.
+            (ii)          Anonymous feedback will not be accepted.
+            (iii)         Users affected by the feedback should be fully informed of all facts and given the opportunity to put forward their case.
+            (iv)         Vague and defamatory feedback will not be entertained.
+            
+            
+            
+            
+            15.  DISCLAIMERS
+            15.1   The services are provided "as is" and without any warranties, claims or representations made by Silent Library  of any kind either expressed, implied or statutory with respect to the services, including, without limitation, warranties of quality, performance, non-infringement, merchantability, or fitness for a particular purpose, nor are there any warranties created by course of dealing, course of performance or trade usage. Without limiting the foregoing and to the maximum extent permitted by applicable law, Silent Library  does not warrant that the services, this site or the functions contained therein will be available, accessible, uninterrupted, timely, secure, accurate, complete or error-free, that defects, if any, will be corrected, or that this site and/or the server that makes the same available are free of viruses, clocks, timers, counters, worms, software locks, drop dead devices, trojan-horses, routings, trap doors, time bombs or any other harmful codes, instructions, programs or components.
+             
+            15.2   You acknowledge that the entire risk arising out of the use or performance of the site and/or the services remains with you to the maximum extent permitted by applicable law.
+             
+            15.3   Silent Library  has no control over and, to the maximum extent permitted by applicable law, does not guarantee or accept any responsibility for: (a) the fitness for purpose, existence, quality, safety or legality of items available via the services; or (b) the ability of sellers to sell items or of buyers to pay for items. If there is a dispute involving one or more users, such users agree to resolve such dispute between themselves directly and, to the maximum extent permitted by applicable law, release Silent Library  and its affiliates from any and all claims, demands and damages arising out of or in connection with any such dispute.
+             
+             
+            16.  EXCLUSIONS AND LIMITATIONS OF LIABILITY
+            16.1   To the maximum extent permitted by applicable law, in no event shall Silent Library  be liable whether in contract, warranty, tort (including, without limitation, negligence (whether active, passive or imputed), product liability, strict liability or other theory), or other cause of action at law, in equity, by statute or otherwise, for:
+            (i)            a) loss of use; (b) loss of profits; (c) loss of revenues; (d) loss of data; (e) loss of good will; or (f) failure to realise anticipated savings, in each case whether direct or indirect; or
+            (ii)          any indirect, incidental, special or consequential damages, arising out of or in connection with the use or inability to use this site or the services, including, without limitation, any damages resulting therefrom, even if Silent Library  has been advised of the possibility of such damages.
+             
+            16.2   You acknowledge and agree that your only right with respect to any problems or dissatisfaction with the services is to request for termination of your account and/or discontinue any use of the services.
+             
+            16.3   If, notwithstanding the previous sections, Silent Library is found by a court of competent jurisdiction to be liable (including for gross negligence), then, to the maximum extent permitted by applicable law, its liability to you or to any third party is limited to the lesser of: (a) any amounts due and payable to you pursuant to the Silent Library; and (b) SGD $100 (one hundred Singapore dollars).
+             
+            16.4   Nothing in these terms of service shall limit or exclude any liability for death or personal injury caused by Silent Library ’s negligence, for fraud or for any other liability on the part of Silent Library  that cannot be lawfully limited and/or excluded.
+            
+            
+            
+            
+            17.   LINKS TO THIRD PARTY SITES
+            Third party links provided throughout the Site will let you leave this Site. These links are provided as a courtesy only, and the sites they link to are not under the control of Silent Library  in any manner whatsoever and you therefore access them at your own risk. Silent Library  is in no manner responsible for the contents of any such linked site or any link contained within a linked site, including any changes or updates to such sites. Silent Library  is providing these links merely as a convenience, and the inclusion of any link does not in any way imply or express affiliation, endorsement or sponsorship by Silent Library  of any linked site and/or any of its content therein.
+            
+            
+            
+            
+            18.  YOUR CONTRIBUTIONS TO THE SERVICES
+            18.1By submitting Content for inclusion on the Services, you represent and warrant that you have all necessary rights and/or permissions to grant the licenses below to Silent Library . You further acknowledge and agree that you are solely responsible for anything you post or otherwise make available on or through the Services, including, without limitation, the accuracy, reliability, nature, rights clearance, compliance with law and legal restrictions associated with any Content contribution. You hereby grant Silent Library  and its successors a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, sub-licensable and transferable license to use, copy, distribute, republish, transmit, modify, adapt, create derivative works of, publicly display, and publicly perform such Content contribution on, through or in connection with the Services in any media formats and through any media channels, including, without limitation, for promoting and redistributing part of the Services (and its derivative works) without need of attribution and you agree to waive any moral rights (and any similar rights in any part of the world) in that respect. You understand that your contribution may be transmitted over various networks and changed to conform and adapt to technical requirements.
+             
+            18.2Any Content, material, information or idea you post on or through the Services, or otherwise transmit to Silent Library  by any means (each, a "Submission"), is not considered confidential by Silent Library  and may be disseminated or used by Silent Library  without compensation or liability to you for any purpose whatsoever, including, but not limited to, developing, manufacturing and marketing products. By making a Submission to Silent Library , you acknowledge and agree that Silent Library  and/or other third parties may independently develop software, applications, interfaces, products and modifications and enhancements of the same which are identical or similar in function, code or other characteristics to the ideas set out in your Submission. Accordingly, you hereby grant Silent Library  and its successors a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, sub-licensable and transferable license to develop the items identified above, and to use, copy, distribute, republish, transmit, modify, adapt, create derivative works of, publicly display, and publicly perform any Submission on, through or in connection with the Services in any media formats and through any media channels, including, without limitation, for promoting and redistributing part of the Services (and its derivative works). This provision does not apply to personal information that is subject to our privacy policy except to the extent that you make such personal information publicly available on or through the Services.
+            
+            
+            
+            
+            19.  THIRD PARTY CONTRIBUTIONS TO THE SERVICES AND EXTERNAL LINKS
+            19.1   Each contributor to the Services of data, text, images, sounds, video, software and other Content is solely responsible for the accuracy, reliability, nature, rights clearance, compliance with law and legal restrictions associated with their Content contribution. As such, Silent Library  is not responsible to, and shall not, regularly monitor or check for the accuracy, reliability, nature, rights clearance, compliance with law and legal restrictions associated with any contribution of Content. You will not hold Silent Library  responsible for any User's actions or inactions, including, without limitation, things they post or otherwise make available via the Services.
+             
+            19.2   In addition, the Services may contain links to third party products, websites, services and offers. These third party links, products, websites and services are not owned or controlled by Silent Library . Rather, they are operated by, and are the property of, the respective third parties, and may be protected by applicable copyright or other intellectual property laws and treaties. Silent Library  has not reviewed, and assumes no responsibility for the content, functionality, security, services, privacy policies, or other practices of these third parties. You are encouraged to read the terms and other policies published by such third parties on their websites or otherwise. By using the Services, you agree that Silent Library  shall not be liable in any manner due to your use of, or inability to use, any website or widget. You further acknowledge and agree that Silent Library  may disable your use of, or remove, any third party links, or applications on the Services to the extent they violate these Terms of Service.
+            
+            
+            
+            
+            20.  YOUR REPRESENTATIONS AND WARRANTIES
+            You represent and warrant that:
+            (a)  you possess the legal capacity (and in the case of a minor, valid parent or legal guardian consent), right and ability to enter into these Terms of Service and to comply with its terms; and
+            (b)  you will use the Services for lawful purposes only and in accordance with these Terms of Service and all applicable laws, rules, codes, directives, guidelines, policies and regulations.
+             
+            
+            
+            21.  INDEMNITY
+            You agree to indemnify, defend and hold harmless Silent Library , and its shareholders, subsidiaries, affiliates, directors, officers, agents, co-branders or other partners, and employees (collectively, the "Indemnified Parties") from and against any and all claims, actions, proceedings, and suits and all related liabilities, damages, settlements, penalties, fines, costs and expenses (including, without limitation, any other dispute resolution expenses) incurred by any Indemnified Party arising out of or relating to: (a) any transaction made on the Site, or any dispute in relation to such transaction (except where Silent Library  or its Affiliates is the Seller in the transaction that the dispute relates to), (b)) the hosting, operation, management and/or administration of the Services by or on behalf of Silent Library , (c) your violation or breach of any term of these Terms of Service or any policy or guidelines referenced herein, (d) your use or misuse of the Services, (e) your breach of any law or any rights of a third party, or (f) any Content uploaded by you.
+            
+            
+             
+            22.  SEVERABILITY
+            If any provision of these Terms of Service shall be deemed unlawful, void, or for any reason unenforceable under the law of any jurisdiction, then that provision shall be deemed severable from these terms and conditions and shall not affect the validity and enforceability of any remaining provisions in such jurisdiction nor the validity and enforceability of the provision in question under the law of any other jurisdiction.
+            
+            
+            
+            
+            23.   GOVERNING LAW
+            These Terms of Service shall be governed by and construed in accordance with the laws of the Republic of Singapore without regard to its conflict of law rules. The United Nations Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act, to the extent applicable, are expressly disclaimed. Unless otherwise required by applicable laws, any dispute, controversy, claim or difference of any kind whatsoever shall arising out of or relating to these Terms of Service against or relating to Silent Library  or any Indemnified Party under these Terms of Service shall be referred to and finally resolved by arbitration in Singapore in accordance with the Arbitration Rules of the Singapore International Arbitration Centre (“SIAC Rules”) for the time being in force, which rules are deemed to be incorporated by reference in this Section. There will be one (1) arbitrator and the language of the arbitration shall be English.
+             
+            
+            
+            24.  GENERAL PROVISIONS
+            24.1   Silent Library  reserves all rights not expressly granted herein.
+             
+            24.2   Silent Library  may modify these Terms of Service at any time by posting the revised Terms of Service on this Site. Your continued use of this Site after such changes have been posted shall constitute your acceptance of such revised Terms of Service.
+             
+            24.3   You may not assign, sublicense or transfer any rights granted to you hereunder or subcontract any of your obligations.
+             
+            24.4   Nothing in these Terms of Service shall constitute a partnership, joint venture or principal-agent relationship between you and Silent Library , nor does it authorise you to incur any costs or liabilities on Silent Library ’s behalf.
+             
+            24.5   The failure of Silent Library  at any time or times to require performance of any provision hereof shall in no manner affect its right at a later time to enforce the same unless the same is waived in writing.
+             
+            24.6   These Terms of Service are solely for your and our benefit and are not for the benefit of any other person or entity, except for Silent Library 's affiliates and subsidiaries (and each of Silent Library 's and its affiliates' and subsidiaries' respective successors and assigns).
+             
+            24.7   The terms set forth in these Terms of Service and any agreements and policies included or referred to in these Terms of Service constitute the entire agreement and understanding of the parties with respect to the Services and the Site and supersede any previous agreement or understanding between the parties in relation to such subject matter. The parties also hereby exclude all implied terms in fact. In entering into the agreement formed by these Terms of Service, the parties have not relied on any statement, representation, warranty, understanding, undertaking, promise or assurance of any person other than as expressly set out in these Terms of Service. Each party irrevocably and unconditionally waives all claims, rights and remedies which but for this Section it might otherwise have had in relation to any of the foregoing. These Terms of Service may not be contradicted, explained or supplemented by evidence of any prior agreement, any contemporaneous oral agreement or any consistent additional terms.
+             
+            24.8   You agree to comply with all applicable laws, statutes, regulations and codes relating to anti-bribery and corruption including without limitation the UK Bribery Act, the US Foreign Corrupt Practices Act and the Singapore Prevention of Corruption Act and confirm that you have and shall have in place all policies and procedures needed to ensure compliance with such requirements.
+             
+            24.9   If you have any questions or concerns about these Terms of Service or any issues raised in these Terms of Service or on the Site, please contacts us at: support@silentlibrary.com.sg.
+             
+            LEGAL NOTICES: Please send all legal notices to legal@silentlibrary.com.sg and Attention it to the “General Counsel”.
+             
+            I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE AND ANY REVISION THE SAME HEREAFTER. BY CLICKING THE “SIGN UP ” OR “CONNECT WITH FACEBOOK” BUTTON BELOW, I UNDERSTAND THAT I AM CREATING A DIGITAL SIGNATURE, WHICH I INTEND TO HAVE THE SAME FORCE AND EFFECT AS IF I HAD SIGNED MY NAME MANUALLY.
+            
+            
+            
+        </pre>
+        </div>
+    </div>
+</main>
+
+<footer class="text-body-secondary py-5">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-4">
+        <h5>Site Map</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="/index.html">Home</a></li>
+          <li><a class="link-secondary" href="/books.html">Books</a></li>
+          <li><a class="link-secondary" href="/events.html">Events</a></li>
+          <li><a class="link-secondary" href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="/contact.html">Privacy Policy</a></li>
+          <li><a class="link-secondary" href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Connect</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Twitter</a></li>
+          <li><a class="link-secondary" href="#">Facebook</a></li>
+          <li><a class="link-secondary" href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    <!-- </p>
+    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p> -->
+  </div>
+
+</footer>
+<div class="b-example-divider"></div>
+
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Silent Library, Inc</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+<script src="/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>
